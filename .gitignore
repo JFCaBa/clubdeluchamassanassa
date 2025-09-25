@@ -1,0 +1,99 @@
+# Dependencies
+/node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+
+# Testing
+/coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Next.js
+/.next/
+/out/
+.next/**
+!.next/static
+!.next/static/**
+
+# Production
+/build/
+
+# Environment variables
+.env*
+!.env.example
+
+# Prisma
+prisma/migrations/
+prisma/sqlite.db
+prisma/sqlite.db-journal
+.dbstudio/
+
+# Runtime data
+tmp/
+temp/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dev.log
+server.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.pem
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+*.tsbuildinfo
+next-env.d.ts
+local-*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Editor backups
+.backup*
+*.bak
+*.tmp
+
+# CLI tooling
+.claude
+.z-ai-config
+test
+prompt
+
+# Database (if using local files)
+*.db
+*.db-journal
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
