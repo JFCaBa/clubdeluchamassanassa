@@ -48,10 +48,10 @@ function initializeNavigation() {
 }
 
 // Enhanced form submission handler
-function initializeForm() {
+async function initializeForm() {
     const contactForm = document.querySelector('form');
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form values
@@ -72,11 +72,45 @@ function initializeForm() {
                 return;
             }
             
-            // Show success message
-            alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
-            
-            // Reset form
-            contactForm.reset();
+            try {
+                // Show loading state
+                const submitButton = contactForm.querySelector('button[type="submit"]') || 
+                                    contactForm.querySelector('input[type="submit"]');
+                if (submitButton) {
+                    const originalText = submitButton.textContent || submitButton.value;
+                    submitButton.textContent = 'Enviando...';
+                    submitButton.disabled = true;
+                }
+                
+                // Send form data to API
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nombre, email, mensaje })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert(result.message || '¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
+                    contactForm.reset();
+                } else {
+                    alert(result.error || 'Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.');
+            } finally {
+                // Reset button state
+                const submitButton = contactForm.querySelector('button[type="submit"]') || 
+                                    contactForm.querySelector('input[type="submit"]');
+                if (submitButton) {
+                    submitButton.textContent = 'Enviar Mensaje';
+                    submitButton.disabled = false;
+                }
+            }
         });
     }
 }
